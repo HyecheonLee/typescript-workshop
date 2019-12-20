@@ -6,10 +6,10 @@
     "node_modules"
   ],
   "compilerOptions": {
-    "module": "es6",
+    "module": "es2015",
     "rootDir": "src",
     "outDir": "dist",
-    "target": "es5",
+    "target": "es2015",
     "sourceMap": true,
     "removeComments": true,
     "noImplicitAny": true,
