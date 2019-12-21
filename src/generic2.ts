@@ -1,9 +1,28 @@
-class LocalDB<T> {
+interface DB<T> {
+  add(v: T): void;
+
+  get(): T;
+}
+
+class D<T> implements DB<T> {
+  add(v: T): void {
+  }
+
+  get(): T {
+    return undefined;
+  }
+}
+
+interface JSONSerializer {
+  serialize(): string;
+}
+
+class LocalDB<T extends JSONSerializer> implements DB<T> {
   constructor(private localStorageKey: string) {
   }
 
   add(v: T) {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(v));
+    localStorage.setItem(this.localStorageKey, v.serialize());
   }
 
   get(): T {
@@ -12,11 +31,23 @@ class LocalDB<T> {
   }
 }
 
-interface User {
-  name: string;
+interface Vegetable {
+  v: string;
 }
 
-const userDb = new LocalDB<User>("user");
-userDb.add({name: "jay"});
-const userA = userDb.get();
-userA.name;
+interface Meat {
+  m: string;
+}
+
+interface Cart2<T> {
+  getItem(): T extends Vegetable ? Vegetable : Meat
+}
+
+const cart1: Cart2<Vegetable> = {
+  getItem() {
+    return {
+      v: ""
+    }
+  }
+};
+cart1.getItem();
