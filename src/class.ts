@@ -1,6 +1,8 @@
+/*
 interface User {
   name: String
 }
+*/
 
 interface Product {
   id: string;
